@@ -4,6 +4,9 @@
     pageEncoding="UTF-8"%>
 
 <%
+
+request.setCharacterEncoding("UTF-8");
+
 MemberDto mem = (MemberDto)session.getAttribute("login");
 
 Object obj = request.getAttribute("bbs");
@@ -30,7 +33,7 @@ BbsDto bbs = (BbsDto)obj;
 
 </head>
 <body>
-<form action="bbs"  method="post" >
+<form action="bbs"  method="post" accept-charset="utf-8">
 
 <input type="hidden" name="seq" value="<%=bbs.getSeq() %>">
 <input type="hidden" name="param" value="updateBbsAf">
