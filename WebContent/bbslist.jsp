@@ -5,7 +5,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%
+<%--
 String choice = request.getParameter("choice");
 String search = request.getParameter("search");
 if(choice == null){
@@ -14,10 +14,11 @@ if(choice == null){
 if(search == null){
 	search = "";
 }
-%> 
+--%> 
 
 
 <%
+/* 
 BbsDao dao = BbsDao.getInstance();
 
 
@@ -46,9 +47,25 @@ if((len%10) > 0){
 	bbspage = bbspage +1;
 }
 
-System.out.println("넘어온 bbspage : "+ bbspage);
+System.out.println("넘어온 bbspage : "+ bbspage); 
+
+*/
 
 MemberDto mem = (MemberDto)session.getAttribute("login");
+String choice = (String)request.getAttribute("choice");
+String search = (String)request.getAttribute("search");
+int pageNumber =Integer.parseInt((String)request.getAttribute("pageNumber"));
+String len = (String)request.getAttribute("len");
+int bbspage = Integer.parseInt((String)request.getAttribute("bbspage"));
+List<BbsDto> list = (List<BbsDto>)request.getAttribute("list");
+
+System.out.println("choice : "+choice);
+System.out.println("search : "+search);
+System.out.println("pageNumber : "+ pageNumber);
+System.out.println("len : "+ len);
+System.out.println("bbspage : "+ bbspage);
+System.out.println("list : "+ list);
+
 %>
 <!DOCTYPE html>
 <html>
@@ -146,7 +163,7 @@ if(list.size() == 0){
 	for(int i =0; i< bbspage; i++ ){
 		if(pageNumber == i){
 			%>
-			<span style="font-size: 15pt; color: #0000ff; font-weight: bold;">
+			<span stylse="font-size: 15pt; color: #0000ff; font-weight: bold;">
 			<%=i + 1 %>
 			</span>&nbsp;
 			<%
@@ -201,7 +218,7 @@ function searchBbs() {
 //	alert(search);
 	
 /* 	location.href = "bbslist.jsp?choice=" + choice + "&search=" + search; */
-	location.href = "bbs?param=searchBbsList&choice=" + choice + "&search=" + search;
+	location.href = "bbs?param=getPagingBbsList&choice=" + choice + "&search=" + search;
 }
 
 function goPage( pageNum ) {
