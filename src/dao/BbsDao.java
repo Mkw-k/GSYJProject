@@ -218,12 +218,16 @@ public void readcount(int seq) {
 	}//end readcount
 
 public boolean updateBbs(int seq, String title, String content) {
+		System.out.println("updateBbs Dao Process");
 		String sql =  " UPDATE BBS"
 					+ " SET TITLE=?, MYCONTENT=?, WDATE=SYSDATE"
 					+ " WHERE SEQ=? ";
 		
 		Connection conn=null;
 		PreparedStatement psmt=null;
+		
+		System.out.println("title :"+title);
+		System.out.println("content :"+content);
 		
 		int count = 0;
 		
@@ -327,18 +331,23 @@ public List<BbsDto> searchBbsList(String choice, String keyword) {
 		
 		String sWord = "";
 		
-		if(choice.equals("title")) {
-			sWord = " WHERE TITLE LIKE '%" + keyword + "%'";
-		}else if(choice.equals("content")) {
-			sWord = " WHERE CONTENT LIKE '%" + keyword + "%'";
-		}else if(choice.equals("writer")) {
-			sWord = " WHERE WRITER LIKE '%" + keyword + "%'";
+		if(!keyword.equals("")) {
+			if(choice.equals("title")) {
+				sWord = " WHERE TITLE LIKE '%" + keyword + "%'";
+			}else if(choice.equals("content")) {
+				sWord = " WHERE CONTENT LIKE '%" + keyword + "%'";
+			}else if(choice.equals("writer")) {
+				sWord = " WHERE WRITER LIKE '%" + keyword + "%'";
+			}
 		}
 		
 		sWord += " AND DEL = 0 ";
+		
 		sql = sql + sWord;
 		
 		sql = sql + " ORDER BY SEQ DESC ";
+		
+		System.out.println("sql : "+ sql);
 		
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -381,40 +390,46 @@ public List<BbsDto> searchBbsList(String choice, String keyword) {
 	}//end searchBbsList
 
 public int getAllBbs(String choice, String search) {
-	String sql = " SELECT COUNT(*) FROM BBS ";
+	String sql =  " SELECT COUNT(*) "
+				+ " FROM BBS ";
+				
 	
-	String sWord = "WHERE DEL = 0 ";
-	
-	if(search.equals(null) || search.equals("")) {
-		
-	}else {
+	String sWord = "";
+	if(!search.equals("")) {
 		if(choice.equals("title")) {
-			if(!search.equals("")) {
-				sWord += " AND TITLE LIKE '%" + search + "%' ";
-			}
+			sWord = " WHERE TITLE LIKE '%" + search + "%' ";
 		}else if(choice.equals("content")) {
-			if(!search.equals("")) {
-				sWord += " AND MYCONTENT LIKE '%" + search + "%' ";
-			}
-			
+			sWord = " WHERE CONTENT LIKE '%" + search + "%' ";
 		}else if(choice.equals("writer")) {
-			if(!search.equals("")) {
-				sWord += " AND MYID='" + search + "' ";
-			}
-		}  
+			sWord = " WHERE ID='" + search + "'";
+		}
 	}
-		
-	
-	
+	 
 	sql = sql + sWord;
 	
+	
+	
+		/*
+		 * String sql = " SELECT COUNT(*) FROM BBS ";
+		 * 
+		 * String sWord = "WHERE DEL = 0 ";
+		 * 
+		 * if(search.equals(null) || search.equals("")) {
+		 * 
+		 * }else { if(choice.equals("title")) { if(!search.equals("")) { sWord +=
+		 * " AND TITLE LIKE '" + search + "' "; } }else if(choice.equals("content")) {
+		 * if(!search.equals("")) { sWord += " AND MYCONTENT LIKE '" + search + "' "; }
+		 * 
+		 * }else if(choice.equals("writer")) { if(!search.equals("")) { sWord +=
+		 * " AND MYID='" + search + "' "; } } }
+		 */
+		
 	System.out.println("sql : "+ sql);
 	Connection conn = null;
 	PreparedStatement psmt = null;
 	ResultSet rs = null;
-	
 	int len = 0;
-			
+	
 	try {
 		conn = DBConnection.getConnection();
 		System.out.println("1/3 getAllBbs success");
@@ -423,6 +438,10 @@ public int getAllBbs(String choice, String search) {
 		System.out.println("2/3 getAllBbs success");
 		
 		rs = psmt.executeQuery();
+		
+		if(rs.next()) {
+			len = rs.getInt(1);
+		}
 		
 		System.out.println("3/3 getAllBbs success");
 		
