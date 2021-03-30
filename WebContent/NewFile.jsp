@@ -16,93 +16,48 @@
 <link rel="stylesheet" href="css/custom.css">
 
 <title>Insert title here</title>
+
+<style type="text/css">
+
+@-webkit-keyframes kenburns-right {
+  0% {
+    -webkit-transform: scale(1) translate(0, 0);
+            transform: scale(1) translate(0, 0);
+    -webkit-transform-origin: 84% 50%;
+            transform-origin: 84% 50%;
+  }
+  100% {
+    -webkit-transform: scale(1.25) translateX(20px);
+            transform: scale(1.25) translateX(20px);
+    -webkit-transform-origin: right;
+            transform-origin: right;
+  }
+}
+
+@keyframes kenburns-right {
+  0% {
+    -webkit-transform: scale(1) translate(0, 0);
+            transform: scale(1) translate(0, 0);
+    -webkit-transform-origin: 84% 50%;
+            transform-origin: 84% 50%;
+  }
+  100% {
+    -webkit-transform: scale(1.25) translateX(20px);
+            transform: scale(1.25) translateX(20px);
+    -webkit-transform-origin: right;
+            transform-origin: right;
+  }
+  
+  .kenburns-right {
+	-webkit-animation: kenburns-right 5s ease-out both;
+	        animation: kenburns-right 5s ease-out both;
+}
+}
+</style>
+
 </head>
 <body>
-<div class="row"  style="display: inline-block;text-align: center;">
-<h1>header</h1>
-
-</div>
-
-
-<div class="row">
-<div class="col-sm-4 bg-primary" >
-.col-sm-4
-</div>
-<div class="col-sm-4 bg-secondary " >
-.col-sm-4
-</div>
-<div class="col-sm-4 bg-success " >
-.col-sm-4
-</div>
-</div>
-
-
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-  <!-- Brand -->
-  <a class="navbar-brand" href="#">Logo</a>
-
-  <!-- Links -->
-  <ul class="navbar-nav">
-    <li class="nav-item">
-      <a class="nav-link" href="#">Link 1</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Link 2</a>
-    </li>
-
-    <!-- Dropdown -->
-    <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-        Dropdown link
-      </a>
-      <div class="dropdown-menu">
-        <a class="dropdown-item" href="#">Link 1</a>
-        <a class="dropdown-item" href="#">Link 2</a>
-        <a class="dropdown-item" href="#">Link 3</a>
-      </div>
-    </li>
-  </ul>
-</nav>
-
-<br><br><br>
-<!-- 
-<div class="container">
-<ul class="nav nav-tabs">
-  <li class="nav-item">
-    <a class="nav-link active" data-toggle="tab" href="#home">Home</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" data-toggle="tab" href="#menu1">Menu 1</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" data-toggle="tab" href="#menu2">Menu 2</a>
-  </li>
-</ul> -->
-
-
-<ul class="nav nav-tabs">
-  <li class="nav-item">
-    <a class="nav-link active" href="#">Active</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Link</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Link</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link disabled" href="#">Disabled</a>
-  </li>
-</ul>
-
-
-<!-- Tab panes -->
-<div class="tab-content">
-  <div class="tab-pane container active" id="home">1번탭</div>
-  <div class="tab-pane container fade" id="menu1">2번탭</div>
-  <div class="tab-pane container fade" id="menu2">3번탭</div>
-</div>
-</div>
+<img alt="" src="./images/bbb.png" class="-webkit-keyframes kenburns-right">
 
 </body>
 </html>

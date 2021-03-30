@@ -108,7 +108,7 @@ System.out.println("list : "+ list);
 <col width="100"><col width="200"><col width="400"><col width="120"><col width="150"><col width="100">
 <thead>
 <tr>	
-			<th>글번호</th><th>제목</th><td>이미지</td><td>내용</td><td>작성자</td><td>작성시간</td><td>조회수</td>
+			<th>글번호</th><td>이미지</td><th>제목</th><td>작성자</td><td>작성시간</td><td>조회수</td>
 </tr>
 </thead>
 <tbody>
@@ -127,11 +127,7 @@ if(list.size() == 0){
 		%>
 		<tr>
 			<td><%=bbs.getRnum() %></td>	
-			<td>
-			<a href="bbs?param=bbsDetail&seq=<%=bbs.getSeq() %>">
-			<%=bbs.getTitle() %>
-			</a>
-			</td>
+			
 			<th>
 			<%--  <input type="button" name="btndown" value="파일"
 					onclick="location.href='bbsdown?filename=<%=bbs.getFilename() %>&seq=<%=bbs.getSeq() %>'">    --%>
@@ -142,9 +138,11 @@ if(list.size() == 0){
 			
 			<td>
 			<a href="bbs?param=bbsDetail&seq=<%=bbs.getSeq() %>">
-			<%=bbs.getMycontent() %>
+			<%=bbs.getTitle() %>
 			</a>
 			</td>
+			
+			
 			<td><%=bbs.getMyid() %></td>
 			<td><%=bbs.getWdate() %></td>
 			<td><%=bbs.getVcount() %></td>
@@ -172,7 +170,7 @@ if(list.size() == 0){
 		%>
 		<a href="#none" title="<%=i+1 %>페이지" onclick="goPage(<%=i %>)"
 			style="font-size: 15pt; color: #000; font-weight: bold; text-decoration: none">
-			[<%=i + 1 %>]
+			[<%= i + 1 %>]
 			</a>&nbsp;
 			<%
 	}
@@ -206,10 +204,15 @@ if(list.size() == 0){
 </div>
 </div>
 
+
+
+
+
+
+
+
 <script type="text/javascript">
-$("#_bbsSbnBtn").click(function() {
-	location.href="bbs?param=bbsWrite";
-});
+
 
 function searchBbs(pageNum) {
 	let choice = document.getElementById("choice").value;
@@ -228,6 +231,7 @@ function goPage( pageNum ) {
 	/* location.href = "bbslist.jsp?choice=" + choice + "&search=" + search + "&pageNumber=" + pageNum; */	
 	location.href = "bbs?param=getPagingBbsList&choice=" + choice + "&search=" + search + "&pageNumber=" + pageNum;	
 }
+
 
 </script>
 </body>
