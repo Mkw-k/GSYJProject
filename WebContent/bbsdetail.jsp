@@ -1,7 +1,7 @@
 <%@page import="Dto.MemberDto"%>
 <%@page import="Dto.BbsDto"%>
 <%@page import="java.util.List"%>
-<%@page import="dao.BbsDao"%>
+<%@page import="Dao.BbsDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%

@@ -237,7 +237,7 @@ if (session.getAttribute("login") != null) {
 
 <script type="text/javascript">
 $(document).ready(function() { 
-	$("#topbutton1").click(function() {
+	$("#signup").click(function() {
 		location.href = "mem?param=toAddMember";
 	});
 });

@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Dao.BbsDao;
 import Dto.BbsDto;
-import dao.BbsDao;
 
 @WebServlet(urlPatterns = "/bbsdown")	
 public class FileDownLoader extends HttpServlet {
