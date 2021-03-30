@@ -55,7 +55,7 @@ MemberDto mem = (MemberDto)session.getAttribute("login");
 String choice = (String)request.getAttribute("choice");
 String search = (String)request.getAttribute("search");
 int pageNumber =Integer.parseInt((String)request.getAttribute("pageNumber"));
-String len = (String)request.getAttribute("len");
+int len = Integer.parseInt((String)request.getAttribute("len"));
 int bbspage = Integer.parseInt((String)request.getAttribute("bbspage"));
 List<BbsDto> list = (List<BbsDto>)request.getAttribute("list");
 
@@ -126,7 +126,7 @@ if(list.size() == 0){
 		
 		%>
 		<tr>
-			<td><%=i+1 %></td>	
+			<td><%=bbs.getRnum() %></td>	
 			<td>
 			<a href="bbs?param=bbsDetail&seq=<%=bbs.getSeq() %>">
 			<%=bbs.getTitle() %>
@@ -211,7 +211,7 @@ $("#_bbsSbnBtn").click(function() {
 	location.href="bbs?param=bbsWrite";
 });
 
-function searchBbs() {
+function searchBbs(pageNum) {
 	let choice = document.getElementById("choice").value;
 	let search = document.getElementById("search").value;
 //	alert(choice);
