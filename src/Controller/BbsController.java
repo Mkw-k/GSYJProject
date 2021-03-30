@@ -20,10 +20,10 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+import DB.DBClose;
+import DB.DBConnection;
+import Dao.BbsDao;
 import Dto.BbsDto;
-import dao.BbsDao;
-import db.DBClose;
-import db.DBConnection;
 import util.UtilEx;
 
 @WebServlet(urlPatterns = "/bbs")	
