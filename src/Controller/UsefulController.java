@@ -3,6 +3,7 @@ package Controller;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import Dao.UsefulDao;
 import Dto.UsefulDto;
 
+@WebServlet(urlPatterns = "/use")	
 public class UsefulController extends HttpServlet{
 
 	@Override
@@ -27,7 +29,24 @@ public class UsefulController extends HttpServlet{
 		
 		String param = req.getParameter("param");
 		
-		if(param.equals("writeUse")) {
+		if(param.equals("getPagingList")) {
+			System.out.println("getPagingList 실행");
+			
+			
+			
+			resp.sendRedirect("usefulwrite.jsp");
+			
+		}
+		
+		
+		else if(param.equals("writeUse")) {
+			System.out.println("writeUse 실행");
+			
+			resp.sendRedirect("usefulwrite.jsp");
+			
+		}
+		
+		else if(param.equals("writeUseAf")) {
 			System.out.println("writeUse 실행");
 			
 			String myid = req.getParameter("myid");

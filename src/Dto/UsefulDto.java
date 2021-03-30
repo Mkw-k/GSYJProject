@@ -3,6 +3,7 @@ package Dto;
 import java.io.Serializable;
 
 public class UsefulDto implements Serializable{
+	private int rnum;
 	private int seq;
 	private String myid;
 	private String title;
@@ -10,7 +11,13 @@ public class UsefulDto implements Serializable{
 	private String wdate;
 	private String link;
 	private int del;
-	private String readcount;
+	private int readcount;
+	public int getRnum() {
+		return rnum;
+	}
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
+	}
 	public int getSeq() {
 		return seq;
 	}
@@ -53,20 +60,21 @@ public class UsefulDto implements Serializable{
 	public void setDel(int del) {
 		this.del = del;
 	}
-	public String getReadcount() {
+	public int getReadcount() {
 		return readcount;
 	}
-	public void setReadcount(String readcount) {
+	public void setReadcount(int readcount) {
 		this.readcount = readcount;
 	}
 	@Override
 	public String toString() {
-		return "UsefulDto [seq=" + seq + ", myid=" + myid + ", title=" + title + ", mycontent=" + mycontent + ", wdate="
-				+ wdate + ", link=" + link + ", del=" + del + ", readcount=" + readcount + "]";
+		return "UsefulDto [rnum=" + rnum + ", seq=" + seq + ", myid=" + myid + ", title=" + title + ", mycontent="
+				+ mycontent + ", wdate=" + wdate + ", link=" + link + ", del=" + del + ", readcount=" + readcount + "]";
 	}
-	public UsefulDto(int seq, String myid, String title, String mycontent, String wdate, String link, int del,
-			String readcount) {
+	public UsefulDto(int rnum, int seq, String myid, String title, String mycontent, String wdate, String link, int del,
+			int readcount) {
 		super();
+		this.rnum = rnum;
 		this.seq = seq;
 		this.myid = myid;
 		this.title = title;
@@ -76,13 +84,17 @@ public class UsefulDto implements Serializable{
 		this.del = del;
 		this.readcount = readcount;
 	}
-	public UsefulDto(String myid, String title, String mycontent, String link) {
+	public UsefulDto(String title, String mycontent, String wdate, String link) {
 		super();
-		this.myid = myid;
 		this.title = title;
 		this.mycontent = mycontent;
+		this.wdate = wdate;
 		this.link = link;
 	}
+	
+	
+	
+	
 	
 	
 	
