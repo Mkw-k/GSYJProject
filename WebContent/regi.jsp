@@ -36,13 +36,11 @@ if(email != null && email != ""){
 <meta name="viewport" content="width=device-width, initial-scale=1">
  
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-<!-- 추가CSS -->
-<link rel="stylesheet" href="css/custom.css">
+<script type="text/javascript" src="kakaoAPI.js"></script> <!-- external 형식-->
 <title>Insert title here</title>
 
 <style type="text/css">
@@ -144,8 +142,9 @@ body{
     <button id="_subBtn" type="submit" class="btn btn-primary" onsubmit="formChk()">Submit</button>&nbsp;&nbsp;
     <button type="button" onclick="history.back()">뒤로가기</button>&nbsp;&nbsp;
     <!--  KaKao Login Btn -->
-	<a href="javascript:kakaoLogin()">
-	<img src="http://210.116.91.144/assets/w/imgs/btn-ka-start@3x.png" width="150px" height="auto" style="max-width:400px;max-height:60px"/>
+	<a href="javascript:kakaoAPI.kakaoLogin()">
+	
+	<img src="https://logins.daum.net/accounts/ksso.do?url=https%3A%2F%2Fwww.daum.net%2F" width="150px" height="auto" style="max-width:400px;max-height:60px"/>
 	</a>
     <p></p>
     
@@ -184,14 +183,6 @@ $(function () {
 });
 
 
-/* $("#_Password2").on('blur', function () {
-	if($("#_Password1").val() != $("#_Password2").val()){
-		alert("패스워드가 서로 다릅니다");
-		$("#_Password1").val(""); 
-		$("#_Password2").val("");
-		location.href = "mem?param=toAddMember";
-	}
-}); */
 
 
 /* 유효성검사 */
@@ -249,24 +240,7 @@ function formChk() {
 }
 
 
-/* 
-$(function () {
 
-	$("#_Password1").focus(function () {
-		$(this).css("background-color", "green");
-	});
-	
-	$("#_Password1").blur(function () {
-		$(this).css("background-color", "#ffffff");
-	});
-	
-	$("#btn").click(function () {
-		
-		// 빈칸 첵크
-		if( $("#_name").val() == "" ){
-			alert('이름을 기입해 주십시오');			
-		} 
-}); */
 </script>
 
 </body>
