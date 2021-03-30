@@ -14,6 +14,7 @@ import db.DBConnection;
 
 
 public class BbsDao {
+	
 	private static BbsDao dao= new BbsDao();
 	
 	private BbsDao() {
@@ -226,8 +227,8 @@ public boolean updateBbs(int seq, String title, String content) {
 		Connection conn=null;
 		PreparedStatement psmt=null;
 		
-		System.out.println("title :"+title);
-		System.out.println("content :"+content);
+		System.out.println("dao title :"+title);
+		System.out.println("dao content :"+content);
 		
 		int count = 0;
 		
@@ -256,26 +257,29 @@ public boolean updateBbs(int seq, String title, String content) {
 	}//end updateBbs
 
 public List<BbsDto> getBbsPagingList(String choice, String search, int pageNumber) {
-		String sql =  " SELECT SEQ, MYID, TITLE, MYCONTENT, WDATE, FILENAME, VCOUNT, DEL"
+		String sql =  " SELECT RNUM, SEQ, MYID, TITLE, MYCONTENT, WDATE, FILENAME, VCOUNT, DEL "
 					+ " FROM ";
-		sql += " (SELECT ROW_NUMBER()OVER(ORDER BY SEQ DESC) AS RNUM,"
-			+  " SEQ, MYID, TITLE, MYCONTENT, WDATE, FILENAME, VCOUNT, DEL"
-			+  " FROM BBS ";
+		sql += " (SELECT ROW_NUMBER()OVER(ORDER BY SEQ DESC) AS RNUM, "
+			+  " SEQ, MYID, TITLE, MYCONTENT, WDATE, FILENAME, VCOUNT, DEL "
+			+  " FROM BBS "
+			+  " WHERE DEL = 0 ";
 		
 		String sWord = "";
+		if(!search.equals("")) {
 		if(choice.equals("title")) {
-			sWord = " WHERE TITLE LIKE '%"+ search + "%' ";
+			sWord = " AND TITLE LIKE '%"+ search + "%' ";
 		}else if (choice.equals("content")) {
-			sWord = " WHERE CONTENT LIKE '%"+ search + "%' ";
+			sWord = " AND CONTENT LIKE '%"+ search + "%' ";
 		}else if (choice.equals("writer")) {
-			sWord = " WHERE ID= '"+ search + "'";
+			sWord = " AND ID= '"+ search + "'";
+		}
 		}
 		
 		sql = sql +sWord;
 		
-		sql = sql + " ORDER BY SEQ DESC) ";
+		sql = sql + " ORDER BY RNUM ASC) ";
 		
-		sql = sql + " WHERE (RNUM >= ? AND RNUM <= ?) AND DEL = 0 ";
+		sql = sql + " WHERE RNUM >= ? AND RNUM <= ? ";
 		
 		int start, end; 
 		start = 1+10*pageNumber;
@@ -296,18 +300,23 @@ public List<BbsDto> getBbsPagingList(String choice, String search, int pageNumbe
 			psmt.setInt(2, end);
 			System.out.println("2/4 getBbsPagingList success");
 			
+			System.out.println("겟페이징리스트 sql : "+sql);
+			
 			rs = psmt.executeQuery();			
 			System.out.println("3/4 getBbsPagingList success");
 			
+			int i =1;
 			while(rs.next()) {
-				BbsDto dto = new BbsDto(rs.getInt(1), 
-										rs.getString(2), 
+				BbsDto dto = new BbsDto(
+										rs.getInt(1), 
+										rs.getInt(2), 
 										rs.getString(3), 
 										rs.getString(4), 
 										rs.getString(5), 
 										rs.getString(6), 
-										rs.getInt(7), 
-										rs.getInt(8) );
+										rs.getString(7), 
+										rs.getInt(8), 
+										rs.getInt(9) );
 									
 				list.add(dto);
 			}			
@@ -323,87 +332,69 @@ public List<BbsDto> getBbsPagingList(String choice, String search, int pageNumbe
 		return list;
 	}//end getBbsPagingList
 
-public List<BbsDto> searchBbsList(String choice, String keyword) {
-		System.out.println("searchBbsList 실행");
-		
-		String sql =  " SELECT SEQ, MYID, TITLE, MYCONTENT, WDATE, FILENAME, VCOUNT, DEL"
-					+ " FROM BBS ";
-		
-		String sWord = "";
-		
-		if(!keyword.equals("")) {
-			if(choice.equals("title")) {
-				sWord = " WHERE TITLE LIKE '%" + keyword + "%'";
-			}else if(choice.equals("content")) {
-				sWord = " WHERE CONTENT LIKE '%" + keyword + "%'";
-			}else if(choice.equals("writer")) {
-				sWord = " WHERE WRITER LIKE '%" + keyword + "%'";
-			}
-		}
-		
-		sWord += " AND DEL = 0 ";
-		
-		sql = sql + sWord;
-		
-		sql = sql + " ORDER BY SEQ DESC ";
-		
-		System.out.println("sql : "+ sql);
-		
-		Connection conn = null;
-		PreparedStatement psmt = null;
-		ResultSet rs = null;
-		
-		List<BbsDto> list = new ArrayList<BbsDto>();
-		
-		try {
-			conn = DBConnection.getConnection();
-			System.out.println("1/4 searchBbsList success");
-				
-			psmt = conn.prepareStatement(sql);
-			System.out.println("2/4 searchBbsList success");
-			
-			rs = psmt.executeQuery();
-			System.out.println("3/4 searchBbsList success");
-			
-			int i = 1; 
-			while(rs.next()) {
-				BbsDto dto = new BbsDto(rs.getInt(i++), 
-										rs.getString(i++),
-										rs.getString(i++),
-										rs.getString(i++),
-										rs.getString(i++),
-										rs.getString(i++),
-										rs.getInt(i++),
-										rs.getInt(i++));
-				list.add(dto);
-			}			
-			System.out.println("4/4 searchBbsList success");
-			
-		} catch (SQLException e) {	
-			System.out.println("searchBbsList fail");
-			e.printStackTrace();
-		} finally {			
-			DBClose.close(conn, psmt, rs);			
-		}
-		
-		return list;
-	}//end searchBbsList
+	/*
+	 * public List<BbsDto> searchBbsList(String choice, String keyword) {
+	 * System.out.println("searchBbsList 실행");
+	 * 
+	 * String sql =
+	 * " SELECT RNUM, SEQ, MYID, TITLE, MYCONTENT, WDATE, FILENAME, VCOUNT, DEL" +
+	 * " FROM BBS ";
+	 * 
+	 * String sWord = " WHERE ";
+	 * 
+	 * if(!keyword.equals("")) { if(choice.equals("title")) { sWord =
+	 * " TITLE LIKE '%" + keyword + "%' AND"; }else if(choice.equals("content")) {
+	 * sWord = " CONTENT LIKE '%" + keyword + "%' AND"; }else
+	 * if(choice.equals("writer")) { sWord = " WRITER LIKE '%" + keyword + "%' AND";
+	 * } }
+	 * 
+	 * sWord += " DEL = 0 ";
+	 * 
+	 * sql = sql + sWord;
+	 * 
+	 * sql = sql + " ORDER BY SEQ RNUM ";
+	 * 
+	 * System.out.println("sql : "+ sql);
+	 * 
+	 * Connection conn = null; PreparedStatement psmt = null; ResultSet rs = null;
+	 * 
+	 * List<BbsDto> list = new ArrayList<BbsDto>();
+	 * 
+	 * try { conn = DBConnection.getConnection();
+	 * System.out.println("1/4 searchBbsList success");
+	 * 
+	 * psmt = conn.prepareStatement(sql);
+	 * System.out.println("2/4 searchBbsList success");
+	 * 
+	 * rs = psmt.executeQuery(); System.out.println("3/4 searchBbsList success");
+	 * 
+	 * int i = 1; while(rs.next()) { BbsDto dto = new BbsDto(rs.getInt(i++),
+	 * rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++),
+	 * rs.getString(i++), rs.getInt(i++), rs.getInt(i++)); list.add(dto); }
+	 * System.out.println("4/4 searchBbsList success");
+	 * 
+	 * } catch (SQLException e) { System.out.println("searchBbsList fail");
+	 * e.printStackTrace(); } finally { DBClose.close(conn, psmt, rs); }
+	 * 
+	 * return list; }
+	 *///end searchBbsList
 
 public int getAllBbs(String choice, String search) {
 	String sql =  " SELECT COUNT(*) "
-				+ " FROM BBS ";
+				+ " FROM BBS"
+				+ " WHERE DEL = 0 ";
 				
 	
 	String sWord = "";
 	if(!search.equals("")) {
 		if(choice.equals("title")) {
-			sWord = " WHERE TITLE LIKE '%" + search + "%' ";
+			sWord = " AND TITLE LIKE '%" + search + "%' ";
 		}else if(choice.equals("content")) {
-			sWord = " WHERE CONTENT LIKE '%" + search + "%' ";
+			sWord = " AND CONTENT LIKE '%" + search + "%' ";
 		}else if(choice.equals("writer")) {
-			sWord = " WHERE ID='" + search + "'";
+			sWord = " AND ID='" + search + "'";
 		}
-	}
+	} 
 	 
 	sql = sql + sWord;
 	

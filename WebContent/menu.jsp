@@ -86,7 +86,7 @@ if(session.getAttribute("login") == null){
 				<li><a href="mem?param=toIndex" accesskey="2" title="">INFO</a></li>
 				<li><a href="#" accesskey="4" title="">유기견제보</a></li>
 				<li><a href="#" accesskey="4" title="">입양신청</a></li>
-				<li><a href="bbs?param=toBbslist" accesskey="5" title="">커뮤니티</a></li>
+				<li><a href="bbs?param=getPagingBbsList" accesskey="5" title="">커뮤니티</a></li>
 				<li><a href="#" accesskey="5" title="">입양후기</a></li>
 				<li><a href="#" accesskey="5" title="">유용한정보</a></li>
 				<li><a href="mem?param=toAddMember" accesskey="5" title="">회원가입</a></li>
