@@ -3,6 +3,7 @@ package Dto;
 import java.io.Serializable;
 
 public class BbsDto implements Serializable{
+	private int rnum;
 	private int seq; 
 	private String myid; 
 	private String title; 
@@ -11,26 +12,11 @@ public class BbsDto implements Serializable{
 	private String filename; 
 	private int vcount;
 	private int del;
-	
-	
-	
-	
-	public BbsDto(int seq, String myid, String title, String mycontent, String wdate, String filename, int vcount,
-			int del) {
-		super();
-		this.seq = seq;
-		this.myid = myid;
-		this.title = title;
-		this.mycontent = mycontent;
-		this.wdate = wdate;
-		this.filename = filename;
-		this.vcount = vcount;
-		this.del = del;
+	public int getRnum() {
+		return rnum;
 	}
-	@Override
-	public String toString() {
-		return "BbsDto [seq=" + seq + ", myid=" + myid + ", title=" + title + ", mycontent=" + mycontent + ", wdate="
-				+ wdate + ", filename=" + filename + ", vcount=" + vcount + ", del=" + del + "]";
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
 	}
 	public int getSeq() {
 		return seq;
@@ -80,6 +66,42 @@ public class BbsDto implements Serializable{
 	public void setDel(int del) {
 		this.del = del;
 	}
+	public BbsDto(int rnum, int seq, String myid, String title, String mycontent, String wdate, String filename,
+			int vcount, int del) {
+		super();
+		this.rnum = rnum;
+		this.seq = seq;
+		this.myid = myid;
+		this.title = title;
+		this.mycontent = mycontent;
+		this.wdate = wdate;
+		this.filename = filename;
+		this.vcount = vcount;
+		this.del = del;
+	}
+	@Override
+	public String toString() {
+		return "BbsDto [rnum=" + rnum + ", seq=" + seq + ", myid=" + myid + ", title=" + title + ", mycontent="
+				+ mycontent + ", wdate=" + wdate + ", filename=" + filename + ", vcount=" + vcount + ", del=" + del
+				+ "]";
+	}
+	public BbsDto(int seq, String myid, String title, String mycontent, String wdate, String filename, int vcount,
+			int del) {
+		super();
+		this.seq = seq;
+		this.myid = myid;
+		this.title = title;
+		this.mycontent = mycontent;
+		this.wdate = wdate;
+		this.filename = filename;
+		this.vcount = vcount;
+		this.del = del;
+	}
+	
+	
+	
+	
+	
 	
 	
 	

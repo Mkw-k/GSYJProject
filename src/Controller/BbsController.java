@@ -48,6 +48,8 @@ public class BbsController extends HttpServlet {
 	}
 	
 	protected void doProcess(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("utf-8");
+		
 		System.out.println("BbsController doProcess!");
 		
 		String param = req.getParameter("param");
@@ -102,11 +104,11 @@ public class BbsController extends HttpServlet {
 						System.out.println("삭제성공");
 					}
 					
-					resp.sendRedirect("index.jsp");
+					resp.sendRedirect("bbs?param=getPagingBbsList");
 					
 				} // end deleteBbs
 				
-		
+	
 // TODO 조회수
 		if (param.equals("readcount")) {
 			 System.out.println("readcount 실행");
@@ -127,7 +129,7 @@ public class BbsController extends HttpServlet {
 				if (param.equals("updateBbs")) {
 					System.out.println("updateBbs 실행");
 					
-					req.setCharacterEncoding("utf-8");
+					
 					
 					int seq = Integer.parseInt(req.getParameter("seq"));
 					
@@ -145,15 +147,15 @@ public class BbsController extends HttpServlet {
 				if (param.equals("updateBbsAf")) {
 					System.out.println("updateBbsAf 실행");
 					
-					req.setCharacterEncoding("UTF-8");
+					//req.setCharacterEncoding("UTF-8");
 					
 					
 					int seq = Integer.parseInt(req.getParameter("seq"));
 					String title = req.getParameter("title");
 					String content = req.getParameter("content");
 					
-					System.out.println("title :"+title);
-					System.out.println("content :"+content);
+					System.out.println("controller title :"+title);
+					System.out.println("controller content :"+content);
 					
 					BbsDao dao = BbsDao.getInstance();
 					
@@ -180,7 +182,7 @@ public class BbsController extends HttpServlet {
 // TODO 페이징으로 리스트 가져가기  
 		if (param.equals("getPagingBbsList")) {
 			System.out.println("getPagingBbsList 실행");
-			
+			System.out.println("getPagingBbsList 1/7");
 			//BbsDao 싱글턴 인스턴스 생성 
 			BbsDao dao = BbsDao.getInstance();
 			
@@ -201,6 +203,7 @@ public class BbsController extends HttpServlet {
 			
 			//pageNumber 넘어옴  (spageNumber에 일단 받아둠)
 			String spageNumber =req.getParameter("pageNumber");
+			System.out.println("getPagingBbsList 2/7");
 			
 			//pageNumber는 0으로 설정, 만약에 spageNumber에 값이 들어가 있다면 pageNumber는 spageNumber로 변경 
 			int pageNumber = 0;
@@ -208,20 +211,25 @@ public class BbsController extends HttpServlet {
 				pageNumber = Integer.parseInt(spageNumber);
 			}
 			System.out.println("pageNumber : "+ pageNumber);
+			System.out.println("getPagingBbsList 3/7");
+			
+			//list 설정 
+			List<BbsDto> list = dao.getBbsPagingList(choice, search, pageNumber);
+			System.out.println("listsize : "+ list.size());
+			System.out.println("getPagingBbsList 4/7");
 			
 			//가져올 데이터의 길이 len을 설정함 
 			int len = dao.getAllBbs(choice, search);
 			System.out.println("len : "+ len);
+			System.out.println("getPagingBbsList 5/7");
 			
 			//bbspage 설정 
 			int bbspage = len/10;
 			if((len%10) > 0){
 				bbspage = bbspage +1;
+			}
 			System.out.println("bbspage : "+ bbspage);
-			
-			//list 설정 
-			List<BbsDto> list = dao.getBbsPagingList(choice, search, pageNumber);
-			System.out.println("list : "+ list);
+			System.out.println("getPagingBbsList 6/7");
 			
 			//모든 데이터 싸서 보내기 
 			req.setAttribute("choice", choice);
@@ -231,8 +239,9 @@ public class BbsController extends HttpServlet {
 			req.setAttribute("bbspage", bbspage+"");
 			req.setAttribute("list", list);
 			
+			System.out.println("getPagingBbsList 7/7");
 			req.getRequestDispatcher("index.jsp?content=bbslist").forward(req, resp);
-			}
+			
 		}//end getPagingBbsList
 
 	}//end doProcess
