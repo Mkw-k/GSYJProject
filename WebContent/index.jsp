@@ -8,7 +8,6 @@ JSP태그 페이지 (메인페이지)
     
     
 --%>
-
 <%
     	String content = request.getParameter("content");
     	if(content == null){
@@ -55,7 +54,7 @@ JSP태그 페이지 (메인페이지)
 }
 
 .body{
-	/* height: 1000px; */
+	/*  height: 2000px; */
 }
 
 .footer{

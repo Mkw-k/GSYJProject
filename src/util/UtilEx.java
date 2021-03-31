@@ -33,4 +33,19 @@ public class UtilEx {
 		}
 		return filename;	// DB에 저장하기 위한 return;
 	}
-}
+	
+	public static String extracTxt(String link) {
+		
+		int idx = link.lastIndexOf("=");
+		if(idx == -1) {
+			// 오류메시지
+		}
+		
+		link = link.substring(idx+1);
+		
+		
+		return link;
+	
+	}//end extracTxt
+
+}//end class
