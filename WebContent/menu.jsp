@@ -133,7 +133,7 @@ if(session.getAttribute("login") == null){
           <a class="nav-link" href="#menu">Menu</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="use?param=">Coupon</a>
+          <a class="nav-link" href="use?param=getPagingBbsList">융용한정보</a>
         </li>
        
        

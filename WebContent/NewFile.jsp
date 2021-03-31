@@ -19,45 +19,13 @@
 
 <style type="text/css">
 
-@-webkit-keyframes kenburns-right {
-  0% {
-    -webkit-transform: scale(1) translate(0, 0);
-            transform: scale(1) translate(0, 0);
-    -webkit-transform-origin: 84% 50%;
-            transform-origin: 84% 50%;
-  }
-  100% {
-    -webkit-transform: scale(1.25) translateX(20px);
-            transform: scale(1.25) translateX(20px);
-    -webkit-transform-origin: right;
-            transform-origin: right;
-  }
-}
-
-@keyframes kenburns-right {
-  0% {
-    -webkit-transform: scale(1) translate(0, 0);
-            transform: scale(1) translate(0, 0);
-    -webkit-transform-origin: 84% 50%;
-            transform-origin: 84% 50%;
-  }
-  100% {
-    -webkit-transform: scale(1.25) translateX(20px);
-            transform: scale(1.25) translateX(20px);
-    -webkit-transform-origin: right;
-            transform-origin: right;
-  }
-  
-  .kenburns-right {
-	-webkit-animation: kenburns-right 5s ease-out both;
-	        animation: kenburns-right 5s ease-out both;
-}
-}
 </style>
 
 </head>
 <body>
-<img alt="" src="./images/bbb.png" class="-webkit-keyframes kenburns-right">
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/18bZ6Vg95Bc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/7edC7JF4S1E" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 </body>
 </html>

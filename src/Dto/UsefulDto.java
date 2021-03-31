@@ -12,6 +12,8 @@ public class UsefulDto implements Serializable{
 	private String link;
 	private int del;
 	private int readcount;
+	
+	
 	public int getRnum() {
 		return rnum;
 	}
@@ -71,6 +73,7 @@ public class UsefulDto implements Serializable{
 		return "UsefulDto [rnum=" + rnum + ", seq=" + seq + ", myid=" + myid + ", title=" + title + ", mycontent="
 				+ mycontent + ", wdate=" + wdate + ", link=" + link + ", del=" + del + ", readcount=" + readcount + "]";
 	}
+	
 	public UsefulDto(int rnum, int seq, String myid, String title, String mycontent, String wdate, String link, int del,
 			int readcount) {
 		super();
@@ -84,13 +87,29 @@ public class UsefulDto implements Serializable{
 		this.del = del;
 		this.readcount = readcount;
 	}
-	public UsefulDto(String title, String mycontent, String wdate, String link) {
+	
+	public UsefulDto(String myid, String title, String mycontent, String link) {
 		super();
+		this.myid = myid;
+		this.title = title;
+		this.mycontent = mycontent;
+		this.link = link;
+	}
+	
+	public UsefulDto(int seq, String myid, String title, String mycontent, String wdate, String link, int del,
+			int readcount) {
+		super();
+		this.seq = seq;
+		this.myid = myid;
 		this.title = title;
 		this.mycontent = mycontent;
 		this.wdate = wdate;
 		this.link = link;
+		this.del = del;
+		this.readcount = readcount;
 	}
+	
+	
 	
 	
 	
