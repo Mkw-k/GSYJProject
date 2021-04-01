@@ -47,7 +47,7 @@ if(session.getAttribute("login") != null){
 			<td>
 				<%
 				if(mem != null){
-					if(mem.getMymanager() == 0){
+					if(mem.getMymanager() == 1){
 						%>
 						<input type="button" value="삭제" onclick="location.href='use?param=deleteUse&seq=<%=dto.getSeq()%>'">
 						<input type="button" value="수정" onclick="location.href='use?param=useUpdate&seq=<%=dto.getSeq()%>'">

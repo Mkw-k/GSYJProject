@@ -198,7 +198,7 @@ if(list.size() == 0){
 
 </div>
 <br>	
-<input id="_bbsSbnBtn" type="button" value="글쓰기" >
+<input id="_bbsSbnBtn" type="button" value="글쓰기" onclick="location.href='bbs?param=bbsWrite'">
 <br><br>
 
 </div>

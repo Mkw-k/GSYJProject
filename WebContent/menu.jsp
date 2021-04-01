@@ -127,7 +127,7 @@ if(session.getAttribute("login") == null){
           <a class="nav-link" href="#">Top <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#about">About</a>
+          <a class="nav-link" href="bbs?param=getPagingBbsList">커뮤니티</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#menu">Menu</a>

@@ -68,7 +68,7 @@ body{
 		<td colspan="2">
 			<input type="button" value="삭제" onclick="location.href='bbs?param=deleteBbs&seq=<%=bbs.getSeq() %>'">
 			<input type="submit" value="수정" onclick="location.href='bbs?param=updateBbs&seq=<%=bbs.getSeq() %>'">
-			<input type="button" value="목록으로" onclick="location.href='index.jsp?content=bbslist&seq=<%=bbs.getSeq() %>'">
+			<input type="button" value="목록으로" onclick="location.href='bbs?param=getPagingBbsList&seq=<%=bbs.getSeq() %>'">
 		</td>
 	</tr>
 </table>

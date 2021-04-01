@@ -18,7 +18,7 @@ public class BbsDao {
 	private static BbsDao dao= new BbsDao();
 	
 	private BbsDao() {
-		
+		DBConnection.initConnection();
 	}
 	
 	public static BbsDao getInstance() {
@@ -218,10 +218,10 @@ public void readcount(int seq) {
 			
 	}//end readcount
 
-public boolean updateBbs(int seq, String title, String content) {
+public boolean updateBbs(int seq, String title, String content, String filename) {
 		System.out.println("updateBbs Dao Process");
 		String sql =  " UPDATE BBS"
-					+ " SET TITLE=?, MYCONTENT=?, WDATE=SYSDATE"
+					+ " SET TITLE=?, MYCONTENT=?, WDATE=SYSDATE, FILENAME=? "
 					+ " WHERE SEQ=? ";
 		
 		Connection conn=null;
@@ -239,6 +239,7 @@ public boolean updateBbs(int seq, String title, String content) {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, title);
 			psmt.setString(2, content);
+			psmt.setString(3, filename);
 			psmt.setInt(3, seq);
 			
 			System.out.println("2/3 S updateBbs");
@@ -300,7 +301,7 @@ public List<BbsDto> getBbsPagingList(String choice, String search, int pageNumbe
 			psmt.setInt(2, end);
 			System.out.println("2/4 getBbsPagingList success");
 			
-			System.out.println("겟페이징리스트 sql : "+sql);
+			//System.out.println("겟페이징리스트 sql : "+sql);
 			
 			rs = psmt.executeQuery();			
 			System.out.println("3/4 getBbsPagingList success");
@@ -415,7 +416,7 @@ public int getAllBbs(String choice, String search) {
 		 * " AND MYID='" + search + "' "; } } }
 		 */
 		
-	System.out.println("sql : "+ sql);
+	//System.out.println("sql : "+ sql);
 	Connection conn = null;
 	PreparedStatement psmt = null;
 	ResultSet rs = null;
