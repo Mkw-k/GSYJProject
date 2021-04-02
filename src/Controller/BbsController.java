@@ -66,7 +66,7 @@ public class BbsController extends HttpServlet {
 				if (param.equals("bbsWrite")) {
 					System.out.println("bbsWrite 실행");
 					
-					resp.sendRedirect("index.jsp?content=bbswrite");
+					resp.sendRedirect("index.jsp?content=./bbs/bbswrite");
 					
 					
 				} // end bbsWrite
@@ -85,7 +85,7 @@ public class BbsController extends HttpServlet {
 					
 					req.setAttribute("bbs", bbs);
 					
-					req.getRequestDispatcher("index.jsp?content=bbsdetail").forward(req, resp);
+					req.getRequestDispatcher("index.jsp?content=./bbs/bbsdetail").forward(req, resp);
 					
 					
 				} // end bbsDetail
@@ -119,7 +119,7 @@ public class BbsController extends HttpServlet {
 			  dao.readcount(seq);
 			  System.out.println("증가완료");
 			  
-			  req.getRequestDispatcher("index.jsp?content=bbsdetail").forward(req, resp);
+			  req.getRequestDispatcher("index.jsp?content=./bbs/bbsdetail").forward(req, resp);
 		  
 		} // end readcount
 		 
@@ -139,7 +139,7 @@ public class BbsController extends HttpServlet {
 					
 					req.setAttribute("bbs", bbs);
 					
-					req.getRequestDispatcher("index.jsp?content=bbsupdate").forward(req, resp);
+					req.getRequestDispatcher("index.jsp?content=./bbs/bbsupdate").forward(req, resp);
 					
 				} // end updateBbs
 				
@@ -153,13 +153,14 @@ public class BbsController extends HttpServlet {
 					int seq = Integer.parseInt(req.getParameter("seq"));
 					String title = req.getParameter("title");
 					String content = req.getParameter("content");
+					String filename = req.getParameter("filename");
 					
 					System.out.println("controller title :"+title);
 					System.out.println("controller content :"+content);
 					
 					BbsDao dao = BbsDao.getInstance();
 					
-					boolean b = dao.updateBbs(seq, title, content);
+					boolean b = dao.updateBbs(seq, title, content, filename);
 					
 					if(b) {
 						System.out.println("변경성공");
@@ -240,9 +241,11 @@ public class BbsController extends HttpServlet {
 			req.setAttribute("list", list);
 			
 			System.out.println("getPagingBbsList 7/7");
-			req.getRequestDispatcher("index.jsp?content=bbslist").forward(req, resp);
+			req.getRequestDispatcher("index.jsp?content=./bbs/bbslist").forward(req, resp);
 			
 		}//end getPagingBbsList
+		
+
 
 	}//end doProcess
 }//end class

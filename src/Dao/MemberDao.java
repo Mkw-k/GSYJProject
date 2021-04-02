@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import DB.DBClose;
 import DB.DBConnection;
@@ -156,5 +158,283 @@ private static MemberDao dao = new MemberDao();
 	 * }
 	 */
 	
+//===============================================회원관리==============================
+	  
+	  public List<MemberDto> getAllMemberList(String choice, String search, int page){
+		  
+		  String sql = " SELECT SEQ, MYID, PWD, EMAIL, MYNAME, PHONENUM, MYMANAGER "
+		  		+ " FROM ";
+		  
+		  sql += " (SELECT ROW_NUMBER()OVER(ORDER BY SEQ DESC) AS RNUM,"
+		  		+ " SEQ, MYID, PWD, EMAIL, MYNAME, PHONENUM, MYMANAGER "
+		  		+ " FROM MYMEMBER ";
+		  	
+		  String sWord="";
+		  
+		  if(choice.equals("id")) {
+			  sWord = " WHERE MYID LIKE '%" + search + "%' ";
+		  } else if(choice.equals("name")) {
+			  sWord = " WHERE MYNAME LIKE '%" + search + "%' ";
+		  }
+		  
+		  sql = sql + sWord;
+		  sql = sql + " ORDER BY RNUM ASC) ";
+		  
+		  sql = sql + " WHERE RNUM >= ? AND RNUM <= ? ";
+		  
+		  int start, end;
+			start = 1 + 10 * page;
+			end = 10 + 10 * page;
+			
+			Connection conn = null;
+			PreparedStatement psmt = null;
+			ResultSet rs = null;
+			
+			
+			List<MemberDto>list = new ArrayList<MemberDto>();
+			
+			
+			
+			try {
+				conn = DBConnection.getConnection();
+				System.out.println("1/4 getAllMemberList");
+				psmt = conn.prepareStatement(sql);
+				psmt.setInt(1, start);
+				psmt.setInt(2, end);
+				System.out.println("2/4 getAllMemberList");
+				
+				rs = psmt.executeQuery();
+				System.out.println("3/4 getAllMemberList");
+
+				while (rs.next()) {
+					MemberDto dto = new MemberDto(
+												rs.getInt(1),
+												rs.getString(2),
+												rs.getString(3),
+												rs.getString(4),
+												rs.getString(5),
+												rs.getString(6),
+												rs.getInt(7));
+					list.add(dto);
+				}
+				System.out.println("4/4 getAllMemberList");
+
+			} catch (SQLException e) {
+				System.out.println("getAllMemberList fail");
+
+				e.printStackTrace();
+			} finally {
+				DBClose.close(conn, psmt, rs);
+			}
+			return list;
+			
+			
+			
+			
+	  }
 	
+	  public int getAllMemberCount(String choice, String search) {
+		  String sql = " SELECT COUNT(*) FROM MYMEMBER ";
+		  
+		  String sWord = "";
+			if(sWord!="") {
+				if(choice.equals("id")) {
+					sWord = " WHERE MYID LIKE '%" + search + "%'";
+				} else if (choice.equals("name")) {
+					sWord = " WHERE MYNAME='" + search + "'";
+				}
+			}
+			sql = sql + sWord;
+			
+			Connection conn = null;
+			PreparedStatement psmt = null;
+			ResultSet rs = null;
+			
+			int len = 0;
+			
+			try {
+				conn = DBConnection.getConnection();
+				System.out.println("1/4 getAllMemberCount success");
+				
+				psmt = conn.prepareStatement(sql);
+				System.out.println("2/4 getAllMemberCount success");
+				rs = psmt.executeQuery();
+				System.out.println("3/4 getAllMemberCount success");
+				if(rs.next()) {
+					len = rs.getInt(1);
+				}
+				System.out.println("4/4 getAllMemberCount success");
+			} catch (SQLException e) {
+				System.out.println("getAllMemberCount fail");
+				e.printStackTrace();
+			} finally {
+				DBClose.close(conn, psmt, rs);
+			}
+			
+			return len;
+	  }
+	  public MemberDto getMemberDetail(int seq) {
+		  String sql = " SELECT SEQ, MYID, PWD, EMAIL, MYNAME, PHONENUM, MYMANAGER "
+		  		+ " FROM MYMEMBER "
+		  		+ " WHERE SEQ=? ";
+		  
+		  Connection conn = null;
+		  PreparedStatement psmt = null;
+		  ResultSet rs = null;
+		  
+		  MemberDto dto = null;
+				  
+		
+		  conn = DBConnection.getConnection();
+		  
+		  try {
+			conn = DBConnection.getConnection(); 
+			 System.out.println("1/4 getMemberDetail"); 
+			psmt = conn.prepareStatement(sql);
+			 System.out.println("2/4 getMemberDetail"); 
+			 psmt.setInt(1, seq);
+			 rs= psmt.executeQuery();
+			 System.out.println("3/4 getMemberDetail"); 
+
+			 while (rs.next()) {
+				 dto = new MemberDto(
+						 			rs.getInt(1),
+						 			rs.getString(2),
+						 			rs.getString(3),
+						 			rs.getString(4),
+						 			rs.getString(5),
+						 			rs.getString(6),
+						 			rs.getInt(7)
+						 );
+				 
+			 }
+			 System.out.println("4/4 getMemberDetail"); 
+
+		} catch (SQLException e) {
+			 System.out.println("getMemberDetail fail"); 
+			e.printStackTrace();
+		} finally {
+			DBClose.close(conn, psmt, rs);
+		}
+		  return dto;
+		  
+				
+	  }
+	  public boolean updateMember(int seq, String pwd, String email, String name, String phonenum) {
+		  String sql = " UPDATE MYMEMBER"
+		  		+ " SET PWD=?, EMAIL=?, MYNAME=?, PHONENUM=? "
+		  		+ " WHERE SEQ=? ";
+		  
+		  Connection conn = null;
+			PreparedStatement psmt = null;
+			int count = 0;
+			
+		
+			try {
+				conn = DBConnection.getConnection();
+				System.out.println("1/3 updateMember success");
+				
+				psmt = conn.prepareStatement(sql);
+				
+				psmt.setString(1, pwd);
+				psmt.setString(2, email);
+				psmt.setString(3, name);
+				psmt.setString(4, phonenum);
+				psmt.setInt(5, seq);
+				System.out.println("2/3 updateMember success");
+				
+		
+				
+				count = psmt.executeUpdate();
+				System.out.println("3/3 updateMember success");
+			} catch (SQLException e) {
+				System.out.println("updateMember fail");
+
+				e.printStackTrace();
+			} finally {
+				DBClose.close(conn, psmt, null);
+			}
+			return count>0?true:false; 
+	  }
+	  
+	  public boolean deleteMember(int seq) {
+		  String sql = " DELETE FROM MYMEMBER "
+					+ " WHERE SEQ=? ";
+			
+			Connection conn = null;
+			PreparedStatement psmt = null;
+			int count = 0;
+			
+			
+			try {
+				conn = DBConnection.getConnection();
+				System.out.println("1/3 deleteMember");
+				
+				psmt = conn.prepareStatement(sql);
+				psmt.setInt(1, seq);
+				System.out.println("2/3 deleteMember");
+
+				count = psmt.executeUpdate();
+				System.out.println("3/3 deleteMember");
+				
+				
+			} catch (SQLException e) {
+				System.out.println("deleteMember fail");
+				e.printStackTrace();
+			}finally {
+				DBClose.close(conn, psmt, null);
+			}
+			
+			return count>0?true:false;
+		
+	  }
+	  //회원이 내 정보 보는 것!
+	  public MemberDto getMyDetail(String Myid) {
+		  String sql = " SELECT SEQ, MYID, PWD, EMAIL, MYNAME, PHONENUM, MYMANAGER "
+		  		+ " FROM MYMEMBER "
+		  		+ " WHERE MYID=? ";
+		  
+		  Connection conn = null;
+		  PreparedStatement psmt = null;
+		  ResultSet rs = null;
+		  
+		  MemberDto dto = null;
+				  
+		
+		  conn = DBConnection.getConnection();
+		  
+		  try {
+			conn = DBConnection.getConnection(); 
+			 System.out.println("1/4 getMemberDetail"); 
+			psmt = conn.prepareStatement(sql);
+			 System.out.println("2/4 getMemberDetail"); 
+			 psmt.setString(1, Myid);
+			 rs= psmt.executeQuery();
+			 System.out.println("3/4 getMemberDetail"); 
+
+			 while (rs.next()) {
+				 dto = new MemberDto(
+						 			rs.getInt(1),
+						 			rs.getString(2),
+						 			rs.getString(3),
+						 			rs.getString(4),
+						 			rs.getString(5),
+						 			rs.getString(6),
+						 			rs.getInt(7)
+						 );
+				 
+			 }
+			 System.out.println("4/4 getMemberDetail"); 
+
+		} catch (SQLException e) {
+			 System.out.println("getMemberDetail fail"); 
+			e.printStackTrace();
+		} finally {
+			DBClose.close(conn, psmt, rs);
+		}
+		  return dto;
+		  
+				
+	  }
+	  
 }

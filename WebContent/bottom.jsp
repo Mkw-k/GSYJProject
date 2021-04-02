@@ -5,27 +5,24 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
 
-<style type="text/css">
 .bottom{
-	background-color: black;	
-	color: white;
+	background-color: white;	
+	color: black;
 	height: 80px;
 	text-align: center;
 	line-height: 80px;
 }
+
 </style>
 
 </head>
 
 <body>
 
-<div class="bottom">
-<!-- 하단메뉴:  -->
-		<a href="#">도움말</a>&nbsp;
-		<a href="#">약관</a>&nbsp;
-		<a href="#">사이트맵</a>
+<div align=center class=bottom>
+	&copy; Untitled. All rights reserved
 </div>
-
 </body>
 </html>

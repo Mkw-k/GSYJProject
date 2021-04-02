@@ -5,31 +5,34 @@
 
 <head>
 
- <!-- 부트스트랩 -->
+<!--bootstarp-->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-<!-- 폰트 -->
+<!-- css -->
 <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
-<link href="css/default.css" rel="stylesheet" type="text/css" media="all" />
 <link href="css/fonts.css" rel="stylesheet" type="text/css" media="all" />
+<link href="css/default.css" rel="stylesheet" type="text/css" media="all" />
+
 <!-- 카카오 맵스 -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=92928f9e601c2b81c37ec8882d4901ac&libraries=services"></script>
 
 
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta content=charset=utf-8>
 <title>견생역전</title>
 
-
 <style>
-/* #banner{
-	 background: url(images/ccc.jpg) no-repeat center; 
+#banner{
+	 background: url("./images/main.jpg") no-repeat center; 
 	 height: 700px;
-	 padding: 120px 0px;
-	 margin-top: 82px;
+	 padding: 380px 0px;
+}
+#countText{
+	color: black;
+}
 
-} */
 /* 탭패널 안에 페이지 넘겨오는 용도 iframe */
 .tapPan {
 	width: 100%;
@@ -41,70 +44,24 @@
 	width: 100%;
 	height: 100%;
 }
-
-.img {
-
-}
-
-.carousel-inner {
-	width: 100%;
-	height: 100%;
-}
+/*//////////////////////////////  */
 </style>
 
 </head>
-<body>
+<body style=background-color:white>
 
-<div id="banner" class="container-fluid">
-		<!-- 윗부분 캐러셀 -->	
-<div id="demo" class="carousel slide" data-ride="carousel">
-  <ul class="carousel-indicators">
-    <li data-target="#demo" data-slide-to="0" class="active"></li>
-    <li data-target="#demo" data-slide-to="1"></li>
-    <li data-target="#demo" data-slide-to="2"></li>
-  </ul>
-  <div class="carousel-inner">
-    <div class="carousel-item active img">
-      <img src="./images/aaa.jpg" alt="Los Angeles" width="1100" height="500">
-      <div class="carousel-caption">
-        <h3>Los Angeles</h3>
-        <p>We had such a great time in LA!</p>
-      </div>   
-    </div>
-    <div class="carousel-item img">
-      <img src="./images/bbb.png" alt="Chicago" width="1100" height="500" >
-      <div class="carousel-caption">
-        <h3>Chicago</h3>
-        <p>Thank you, Chicago!</p>
-      </div>   
-    </div>
-    <div class="carousel-item img">
-      <img src="./images/ccc.jpg" alt="New York" width="1100" height="500">
-      <div class="carousel-caption">
-        <h3>New York</h3>
-        <p>We love the Big Apple!</p>
-      </div>   
-    </div>
-  </div>
-  <a class="carousel-control-prev" href="#demo" data-slide="prev">
-    <span class="carousel-control-prev-icon"></span>
-  </a>
-  <a class="carousel-control-next" href="#demo" data-slide="next">
-    <span class="carousel-control-next-icon"></span>
-  </a>
-</div>
-</div>
-	
+
+<!-- 메인 이미지 -->
+<div id="banner" class="container-fluid"></div>
 
 
 
 <!-- count -->
-<table align="center" class="countname">
+<table align="center" class="countname countText">
 <col width="600"><col width="600"><col width="600">
 <col width="600"><col width="600"><col width="600"><col width="600"><col width="600">
 	<tr></tr>
 	<tr>
-	
 		<th></th>
 		<th class="memberCountCon1" ></th>
 		<th></th>
@@ -132,6 +89,8 @@
 
 
 
+
+
 <div id="wrapper">
 	<div id="staff" class="container">
 		<div class="title" id='title'>
@@ -142,53 +101,14 @@
 			여러분의 제보가 귀여운 멍멍이의 생명을 구할 수 있습니다.		
 			</span> 
 		</div>
-		<img src="images/ddd.jpg" width="100%" height="100%" alt="" />
-		<!-- <div class="boxA"><img src="images/222.png" width="300" height="450" alt="" /></div>
+		<div class="boxA"><img src="images/222.png" width="300" height="450" alt="" /></div>
 		<div class="boxB"><img src="images/777.png" width="300" height="450" alt="" /></div>
-		<div class="boxC"><img src="images/555.png" width="300" height="450" alt="" /></div> -->
+		<div class="boxC"><img src="images/555.png" width="300" height="450" alt="" /></div>
 	</div>
 	
 	<!-- 인포 정보 더 만들기 (다른 게시판들 접근성 더 키우기?) -->
 	<!-- 메일링 서비스 -->
-	<div id="page" class="container">
-		<div class="boxA">
-			<h2>Fusce ultrices<br />
-				<span>fringilla metus</span></h2>
-			<p>Donec leo, vivamus fermentum nibh in augue praesent a lacus at urna congue rutrum.</p>
-			<ul class="style4">
-				<li class="first"><a href="#">Consectetuer adipiscing elit</a></li>
-				<li><a href="#">Metus aliquam pellentesque</a></li>
-				<li><a href="#">Proin gravida orci porttitor</a></li>
-			</ul>
-		</div>
-		<div class="boxB">
-			<h2>Praesent<br />
-				<span> scelerisque scelerisque</span></h2>
-			<ul class="style3">
-				<li class="first">
-					<p class="date"><a href="#">Dec<b>30</b></a></p>
-					<h3>Amet sed volutpat mauris</h3>
-					<p><a href="#">Mauris tempus nibh sodales adipiscing dolore.</a></p>
-				</li>
-				<li>
-					<p class="date"><a href="#">Dec<b>28</b></a></p>
-					<h3>Sagittis diam dolor amet</h3>
-					<p><a href="#">Duis arcu tortor fringilla sed  sed magna.</a></p>
-				</li>
-			</ul>
-		</div>
-		<div class="boxC">
-			<h2>Etiam posuere<br />
-				<span>augue sit amet</span></h2>
-			<ul class="style4">
-				<li class="first"><a href="#">Consectetuer adipiscing elit</a></li>
-				<li><a href="#">Metus aliquam pellentesque</a></li>
-				<li><a href="#">Suspendisse iaculis mauris</a></li>
-				<li><a href="#">Urnanet non molestie semper</a></li>
-				<li><a href="#">Suspendisse iaculis mauris</a></li>
-			</ul>
-		</div>
-	</div>
+	
 	
 	<br/>
 	<div class='container' align='center' id='useful'>
@@ -215,12 +135,9 @@
 	    <div id="menu2" class="container tab-pane fade"><br>
 	     	 <p>2번 내용</p>
 	    </div>
-<!-- 유용한정보  -->
 	    <div id="menu3" class="container tab-pane fade"><br>
-	    	  <iframe class="tapPan" src="use?param=UsefulTabPagingList" >
-
-			</iframe>
-
+	     <iframe class="tapPan" src="use?param=UsefulTabPagingList" ></iframe>
+	    	  <p>3번 내용</p>
 	    </div>	    
 	   </div>
 	</div>
@@ -341,12 +258,12 @@ var ps = new kakao.maps.services.Places();
 var infowindow = new kakao.maps.InfoWindow({zIndex:1});
 
 //키워드로 장소를 검색
-//searchPlaces();
+/* searchPlaces(); */
 
 
 
 //장소검색 값을 넣어주는 함수
-function searchPlaces() {
+function searchHospital() {
 
     var keyword = document.getElementById('keyword').value;
     if (keyword == null || keyword == "") {
@@ -390,9 +307,7 @@ function displayMarker(place) {
 }
 
 
-$(function() {
-	$("#_menu3P").load('usefullist.jsp');
-});
+
 
 
 </script>
