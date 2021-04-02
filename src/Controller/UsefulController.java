@@ -35,8 +35,6 @@ public class UsefulController extends HttpServlet{
 		if(param.equals("getPagingList")) {
 			System.out.println("getPagingList 실행");
 			
-			
-			
 			resp.sendRedirect("usefulwrite.jsp");
 			
 		}
@@ -138,7 +136,7 @@ public class UsefulController extends HttpServlet{
 			req.setAttribute("list", list);
 			
 			System.out.println("getPagingBbsList 7/7");
-			req.getRequestDispatcher("index.jsp?content=usefullist").forward(req, resp);
+			req.getRequestDispatcher("index.jsp?content=./useful/usefullist").forward(req, resp);
 			
 			
 		}
@@ -205,7 +203,7 @@ public class UsefulController extends HttpServlet{
 			req.setAttribute("list", list);
 			
 			System.out.println("UsefulTabPagingList 7/7");
-			req.getRequestDispatcher("usefullist.jsp").forward(req, resp);
+			req.getRequestDispatcher("./useful/usefullist.jsp").forward(req, resp);
 			
 			
 		}
@@ -242,7 +240,7 @@ public class UsefulController extends HttpServlet{
 			
 			req.setAttribute("dto", dto);
 			
-			req.getRequestDispatcher("usefuldetail.jsp").forward(req, resp);
+			req.getRequestDispatcher("./useful/usefuldetail.jsp").forward(req, resp);
 		
 		}//end useDetail
 		
@@ -256,7 +254,7 @@ else if(param.equals("useUpdate")) {
 			
 			req.setAttribute("dto", dto);
 			
-			req.getRequestDispatcher("usefulupdate.jsp").forward(req, resp);;
+			req.getRequestDispatcher("./useful/usefulupdate.jsp").forward(req, resp);;
 			
 		}//end useUpdate
 		

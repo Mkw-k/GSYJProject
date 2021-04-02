@@ -12,6 +12,7 @@ public class BbsDto implements Serializable{
 	private String filename; 
 	private int vcount;
 	private int del;
+	
 	public int getRnum() {
 		return rnum;
 	}

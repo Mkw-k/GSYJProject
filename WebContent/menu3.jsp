@@ -4,7 +4,7 @@
 <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
     
 
-<%
+<%-- <%
 MemberDto mem = null;
 String nowLog = "";
 if(session.getAttribute("login") == null){
@@ -14,7 +14,7 @@ if(session.getAttribute("login") == null){
    mem = (MemberDto)ologin;
    nowLog = mem.getMyid()+" 님 환영합니다";
 }
-%>
+%> --%>
 
 
 <!DOCTYPE html>
@@ -110,7 +110,7 @@ if(session.getAttribute("login") == null){
 </div>
    
    
-<%
+<%-- <%
 
 if (session.getAttribute("login") == null) {
 %>
@@ -133,7 +133,7 @@ if (session.getAttribute("login") != null) {
    </script>
 <%
    }
-%>
+%> --%>
 
 
 <script type="text/javascript">
