@@ -24,11 +24,12 @@ public class BbsDao {
 	public static BbsDao getInstance() {
 		return dao;
 	}
-	
+
+//TODO 글쓰기 (FREE 필요)
 public boolean writeBbs(BbsDto bbs) {
 		String sql =  " INSERT INTO BBS (SEQ, MYID, "
-					+ " TITLE, MYCONTENT, WDATE, FILENAME, VCOUNT, DEL)"
-					+ " VALUES(SEQ_BBS.NEXTVAL, ?, ?, ?, SYSDATE, ?, 0, 0) ";
+					+ " TITLE, MYCONTENT, WDATE, FILENAME, VCOUNT, DEL, FREE)"
+					+ " VALUES(SEQ_BBS.NEXTVAL, ?, ?, ?, SYSDATE, ?, 0, 0, 0) ";
 		
 		Connection conn = null;
 		PreparedStatement psmt = null;		
@@ -60,56 +61,38 @@ public boolean writeBbs(BbsDto bbs) {
 	}//end writeBbs
 	
 	
-public List<BbsDto> getBbsList() {
-		
-		String sql =  " SELECT SEQ, MYID, TITLE, MYCONTENT, WDATE, FILENAME, VCOUNT, DEL "
-					+ " FROM BBS "
-					+ " WHERE DEL = 0"
-					+ " ORDER BY SEQ DESC ";
-		
-		Connection conn = null;
-		PreparedStatement psmt = null;
-		ResultSet rs = null;
-		
-		List<BbsDto> list = new ArrayList<BbsDto>();
-		
-conn = DBConnection.getConnection();
-		
-		try {
-			conn = DBConnection.getConnection();
-			System.out.println("1/4 S getBbsList");
-			
-			psmt = conn.prepareStatement(sql);
-			System.out.println("2/4 S getBbsList");
-			
-			rs = psmt.executeQuery();
-			System.out.println("3/4 S getBbsList");
-			
-			while(rs.next()) {
-				int i = 1;
-				BbsDto dto = new BbsDto(rs.getInt(i++), 
-										rs.getString(i++), 
-										rs.getString(i++), 
-										rs.getString(i++), 
-										rs.getString(i++), 
-										rs.getString(i++),
-										rs.getInt(i++), 
-										rs.getInt(i++) 
-										);
-				list.add(dto);
-			}
-			System.out.println("4/4 S getBbsList");
-			
-		} catch (SQLException e) {	
-			System.out.println("Fail getBbsList");
-			e.printStackTrace();
-		} finally {
-			DBClose.close(conn, psmt, rs);			
-		}
-		
-		return list;
-	}//end getBbsList
-	
+	/*
+	 * public List<BbsDto> getBbsList() {
+	 * 
+	 * String sql =
+	 * " SELECT SEQ, MYID, TITLE, MYCONTENT, WDATE, FILENAME, VCOUNT, DEL " +
+	 * " FROM BBS " + " WHERE DEL = 0" + " ORDER BY SEQ DESC ";
+	 * 
+	 * Connection conn = null; PreparedStatement psmt = null; ResultSet rs = null;
+	 * 
+	 * List<BbsDto> list = new ArrayList<BbsDto>();
+	 * 
+	 * conn = DBConnection.getConnection();
+	 * 
+	 * try { conn = DBConnection.getConnection();
+	 * System.out.println("1/4 S getBbsList");
+	 * 
+	 * psmt = conn.prepareStatement(sql); System.out.println("2/4 S getBbsList");
+	 * 
+	 * rs = psmt.executeQuery(); System.out.println("3/4 S getBbsList");
+	 * 
+	 * while(rs.next()) { int i = 1; BbsDto dto = new BbsDto(rs.getInt(i++),
+	 * rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++),
+	 * rs.getString(i++), rs.getInt(i++), rs.getInt(i++) ); list.add(dto); }
+	 * System.out.println("4/4 S getBbsList");
+	 * 
+	 * } catch (SQLException e) { System.out.println("Fail getBbsList");
+	 * e.printStackTrace(); } finally { DBClose.close(conn, psmt, rs); }
+	 * 
+	 * return list; }
+	 *///end getBbsList
+
+//TODO 디테일페이지로 이동 : Dto데이터 한개만 받아옴 (FREE 업어도됨)
 public BbsDto getBbs(int seq) {
 		String sql =  " SELECT SEQ, MYID, TITLE, MYCONTENT, WDATE, FILENAME, VCOUNT, DEL "
 					+ " FROM BBS "
@@ -156,7 +139,8 @@ public BbsDto getBbs(int seq) {
 		return bbs;
 		
 	}//end getBbs
-	
+
+//TODO 삭제 (FREE 필요없) 
 public boolean deleteBbs(int seq) {
 		String sql =  " UPDATE BBS "
 					+ " SET DEL = 1 "
@@ -186,7 +170,8 @@ public boolean deleteBbs(int seq) {
 		
 		return count>0?true:false;
 	}//end deleteBbs
-	
+
+//TODO 조회수증가 (FREE 필요없) 
 public void readcount(int seq) {
 			int count=0;
 			
@@ -218,6 +203,7 @@ public void readcount(int seq) {
 			
 	}//end readcount
 
+//TODO 업데이트 (FREE 필요없) 
 public boolean updateBbs(int seq, String title, String content, String filename) {
 		System.out.println("updateBbs Dao Process");
 		String sql =  " UPDATE BBS"
@@ -240,7 +226,7 @@ public boolean updateBbs(int seq, String title, String content, String filename)
 			psmt.setString(1, title);
 			psmt.setString(2, content);
 			psmt.setString(3, filename);
-			psmt.setInt(3, seq);
+			psmt.setInt(4, seq);
 			
 			System.out.println("2/3 S updateBbs");
 
@@ -257,13 +243,14 @@ public boolean updateBbs(int seq, String title, String content, String filename)
 		return count>0?true:false;
 	}//end updateBbs
 
+////TODO 겟페이징 리스트 : 페이징이 있는 게시판을 운용하기 위해 10개씩 가져감 (FREE 필요)
 public List<BbsDto> getBbsPagingList(String choice, String search, int pageNumber) {
 		String sql =  " SELECT RNUM, SEQ, MYID, TITLE, MYCONTENT, WDATE, FILENAME, VCOUNT, DEL "
 					+ " FROM ";
 		sql += " (SELECT ROW_NUMBER()OVER(ORDER BY SEQ DESC) AS RNUM, "
 			+  " SEQ, MYID, TITLE, MYCONTENT, WDATE, FILENAME, VCOUNT, DEL "
 			+  " FROM BBS "
-			+  " WHERE DEL = 0 ";
+			+  " WHERE (DEL = 0 AND FREE=0) ";
 		
 		String sWord = "";
 		if(!search.equals("")) {
@@ -380,10 +367,11 @@ public List<BbsDto> getBbsPagingList(String choice, String search, int pageNumbe
 	 * return list; }
 	 *///end searchBbsList
 
+//TODO 페이지수 뽑아내기 위해 모든 데이터의 갯수 확인 (FREE 필요) 
 public int getAllBbs(String choice, String search) {
 	String sql =  " SELECT COUNT(*) "
 				+ " FROM BBS"
-				+ " WHERE DEL = 0 ";
+				+ " WHERE DEL=0 AND FREE =0 ";
 				
 	
 	String sWord = "";
