@@ -45,7 +45,7 @@ iframe{
 #banner{
 	 background: url("./images/main.png") no-repeat center; 
 	 background-size: 100%;
-	 height: 1000px;
+	/*  height: 1000px; */
 	 padding: 380px 0px;
 }
 #countText{
@@ -82,9 +82,23 @@ iframe{
 
 
 
+/* 탭패널 안에 페이지 넘겨오는 용도 iframe */
+.tapPan {
+   width: 100%;
+   height: 1070px;
+   border: none;
+}
 
+.tab-content {
+   width: 100%;
+   height: 100%;
+}
+/*//////////////////////////////  */
 
-
+/* 이미지배너스타일 */
+.imgBanner{
+	padding: 5px 5px;
+}
 
 </style>
 
@@ -93,7 +107,46 @@ iframe{
 
 
 <!-- 메인 이미지 -->
-<div id="banner" class="container-fluid"></div>
+<!-- <div id="banner" class="container-fluid"></div> -->
+
+<div class="container-fluid">
+<div id="demo" class="carousel slide" data-ride="carousel">
+  <ul class="carousel-indicators">
+    <li data-target="#demo" data-slide-to="0" class="active"></li>
+    <li data-target="#demo" data-slide-to="1"></li>
+    <li data-target="#demo" data-slide-to="2"></li>
+  </ul>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="./images/main.png" alt="Los Angeles" width="100%" height="800">
+      <div class="carousel-caption">
+        <h3>Los Angeles</h3>
+        <p>We had such a great time in LA!</p>
+      </div>   
+    </div>
+    <div class="carousel-item">
+      <img src="./image/carousel01.jpg" alt="Chicago" width="100%" height="800">
+      <div class="carousel-caption">
+        <h3>Chicago</h3>
+        <p>Thank you, Chicago!</p>
+      </div>   
+    </div>
+    <div class="carousel-item">
+      <img src="./image/carousel02.jpg" alt="New York" width="100%" height="800">
+      <div class="carousel-caption">
+        <h3>New York</h3>
+        <p>We love the Big Apple!</p>
+      </div>   
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </a>
+  <a class="carousel-control-next" href="#demo" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </a>
+</div>
+</div>
 
 <br><br>
 
@@ -134,40 +187,58 @@ iframe{
 	<div id='info'></div>
 	<iframe src="NewFile.jsp" border="0" framespacing="0" marginheight="0" marginwidth="0" scrolling="no"  vspace="0" style="width: 100%; " ></iframe>
 
-	GSYJ FOCUS ON
-	<div class="container" >
-		<div class="row" style="background-color: black; height: 600px;">
-			<div class="col-6" >
-				<img alt="" src="">
-			</div>
-			<div class="col-6">
-				<div class="row" style="height: 600px">
-					<div class="col-12">
-						<img alt="" src="">
-					</div>
-					<div class="col-12">
-						<img alt="" src="">
-					</div>
-				</div>
-			
-			</div>
-		</div>
+	
+	
+	<div class="container-fluid" style="padding: 0px 100px;">
+		<table style="width: 100%;">
+			<tr>
+				<td rowspan="2"> 
+				<img alt="" src="./image/후기 & 커뮤니티/후기 & 커뮤니티 (10).jfif" style="height: 600px;" class="imgBanner">
+				</td>
+				<td colspan="2">
+				<img alt="" src="./image/후기 & 커뮤니티/후기 & 커뮤니티 (8).jfif" style="height: 300px; width: 100%;" class="imgBanner">
+				</td>
+			</tr>
+			<tr>
+				<td>
+				<img alt="" src="./image/후기 & 커뮤니티/후기 & 커뮤니티 (3).jfif" style="height: 300px; width: 100%;" class="imgBanner">
+				</td>
+				<td>
+				<img alt="" src="./image/후기 & 커뮤니티/후기 & 커뮤니티 (3).jfif" style="height: 300px; width: 100%;" class="imgBanner">
+				</td>
+			</tr>
+		</table>
 	</div>
 		
 	
-
 	<!--입양시스템 -->
 	<div class="ad_s">
 		<img alt="" src="" >
 	</div>
 
-	
-	<!-- 유용한 정보  -->
+<!-- 타이틀 모델 1 유용한 영상 -->
+<div class="container-fluid">
+  	<div class="row" style="display: flex; align-items: center;">
+		<div class="col-5" >
+			<hr width = "100%" color = "#DEE2E6">
+		</div>
+		<div class="col-2" style="text-align: center; ">
+			<h1>USEFUL CONTENT</h1>
+		</div>
+		<div class="col-5">
+			<hr width = "100%" color = "#DEE2E6" > 
+		</div>  	
+  	</div>
+</div>
+
+<!-- 유용한 정보  -->
+<div class="container-fluid">
 	<br><br><br><br><br>
+	<div class="row">
+	<div class="col-12">	
 	<div align='center' id='useful'>
-	<div style="width:80%">
-	<h1>USEFUL CONTENT</h1>
-	<br>
+	<div style="width:90%">
+	
 	  <!-- Nav tabs -->
 	  <ul class="nav nav-tabs" role="tablist">
 	    <li class="nav-item">
@@ -197,28 +268,28 @@ iframe{
 	   </div>
 	</div>
 	<br/><br/><br/><br/><br/><br/> 	
-	   
+	</div>
+	</div>
+</div>	   
 	   
 	   
 
   
-  <div class="container-fluid">
-  	<div class="row">
-		<div class="col-5" style="vertical-align: middle;">
-			<hr width = "100%" color = "#DEE2E6">
-		</div>
-		<div class="col-2" style="text-align: center;">
-			<h2>USEFUL CONTENT</h2>
-		</div>
-		<div class="col-5">
-			<hr width = "100%" color = "#DEE2E6">
-		</div>  	
-  	</div>
-  
-  </div>	   
+    
 
 	   
-	<!-- 동물병원 검색 -->   
+
+	<!-- 타이틀 모델 2 동물병원 검색 -->  
+	<div class="container">
+	<div class="row">
+		<div class="col-12" style="text-align: center;">
+			<font style="font-size: 50px; font-weight: bold;" >동물병원 검색</font><br>
+			<hr style="height: 2px;" width="100px" align="center" color="black" >
+				
+		</div>
+	</div>
+</div>
+	<!-- 동물병원 검색 --> 
 	<div align=center>
 
 	  <br>

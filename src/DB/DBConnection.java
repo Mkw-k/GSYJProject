@@ -24,7 +24,7 @@ public class DBConnection {
 	public static Connection getConnection() {
 		// URL주소 : DB로 넘어가서 오라클 우클릭 - properties - Driver Properties - Connection URL 
 		Connection conn = null;
-		String url = "jdbc:oracle:thin:@192.168.0.223:1521:xe";
+		String url = "jdbc:oracle:thin:@localhost:1521:xe";
 		String id = "hr";
 		String pw = "hr";
 
